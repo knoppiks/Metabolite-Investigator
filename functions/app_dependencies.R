@@ -1,9 +1,9 @@
 # install dependencies when using github package
-source("functions/install_dependencies.R") # REMOVE_IN_GITLAB_TAG
-install_dependencies() # REMOVE_IN_GITLAB_TAG
+source("functions/install_dependencies.R")   # REMOVE_FOR_DOCKER_BUILD
+install_dependencies()                       # REMOVE_FOR_DOCKER_BUILD
 
 # Important dependency for hosting on shinyapps.io -----------------------
-options(repos = BiocManager::repositories())
+options(repos = BiocManager::repositories()) # REMOVE_FOR_DOCKER_BUILD
 getOption("repos")
 
 # load required packages -> This doesn't work with parallel hosting on shinyapps.io -> breaks dependencies
@@ -12,7 +12,7 @@ getOption("repos")
 # }
 
 # seperate calls to all packages? -> package dependency is otherwise not recognized by shinyapps.io
-library("BiocManager")
+library("BiocManager")                       # REMOVE_FOR_DOCKER_BUILD
 library("data.table")
 library("corrplot")
 library("sva")
@@ -26,7 +26,7 @@ library("lme4")
 library("DT")
 
 # shiny Options - enable larger Upload sizes
-options(shiny.maxRequestSize=30*1024^2) 
+options(shiny.maxRequestSize=30*1024^2)
 
 # Functions ---------------------------------------------------------------
 source("functions/test_r2_distribution.R")
@@ -67,5 +67,5 @@ source("functions/str_extract.R")
 source("functions/max_threads.R")
 source("functions/methods_block.R")
 
-# Thx @Jonas Wagner for this simple solution to the weird empty plot bug
+# Thx @knoppiks for this simple solution to the weird empty plot bug
 pdf(NULL)
